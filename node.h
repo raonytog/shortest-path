@@ -1,12 +1,12 @@
 #ifndef _NODE_H_
 #define _NODE_H_
 
-#include "edge.h"
-
 typedef struct Node Node;
 
 /** basics */
 Node *createNode();
+
+void printNode(Node *node);
 
 void destroyNode(Node *node);
 
@@ -19,8 +19,9 @@ Node* getNodeFather(Node *node);
 
 int getNodeDistance(Node *node);
 
-Edge** getNodeEdges(Node *node);
+int* getNodeAdjList(Node *node);
 
-int getNumEdges(Node *node);
+/** setters */
+void setNodeAdj(Node *node, int idx, int distance);
 
 #endif // !_NODE_H_

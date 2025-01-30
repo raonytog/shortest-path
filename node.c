@@ -1,27 +1,46 @@
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 #include "node.h"
 
 struct Node {
     char *name;
+    int idx;
+
     Node *father;
     int distance;
 
-    Edge **edges;
-    int numEdges;
+    int *adj;
+    int adjSize;
 };
 
-Node *createNode() {
-    return NULL;
+Node *createNode(char *name, int idx, int qtdNodes) {
+    if (!name || idx < 0) return NULL;
+
+    Node *new = malloc(sizeof(Node));
+    new->name = strdup(name);
+    new->idx = idx;
+    new->adj = malloc(qtdNodes * sizeof(int));
+    new->adjSize = qtdNodes;
+
+    return new;
+}
+
+void printNode(Node *node) {
+    if (!node) return;
+    printf("%s:", getNodeName(node));
+    for (int i = 0; i < node->adjSize; i++) {
+        if (i == node->idx) printf(" 0");
+        else { printf(" %d", node->adj[i]); }
+    }
+    printf("\n");
 }
 
 void destroyNode(Node *node) {
     if (!node) return;
 
     free(node->name);
-    for(int i = 0; i < getNumEdges(node); i++) {
-        destroyEdge(node->edges[i]);
-    }
 }
 
 int compare(Node *n, Node *m) {
@@ -43,12 +62,15 @@ int getNodeDistance(Node *node) {
     return node->distance;
 }
 
-Edge** getNodeEdges(Node *node) {
-    if (!node) return NULL;
-    return node->edges;
+int* getNodeAdjList(Node *node) {
+    if (!node) return 0;
+    else return node->adj;
 }
 
-int getNumEdges(Node *node) {
-    if (!node) return 0;
-    return node->numEdges;
+void setNodeAdj(Node *node, int idx, int distance) {
+    if (!node || idx < 0 || distance < 0) return;
+    node->adj[idx] = distance;
 }
+
+
+

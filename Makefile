@@ -3,10 +3,10 @@ path = "casos_teste_v3/caso_teste_muito_pequeno_1.txt"
 all:
 	clear
 	make comp
-	./prog
+	bin/prog
 
 comp:
-	gcc *.c -o prog
+	gcc *.c -o bin/prog
 
 valg: 
 	make comp
