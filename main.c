@@ -6,6 +6,7 @@
 
 void verifyArgc(int argc);
 void readSourceName(FILE *entrada, char *s);
+int readNumNodes(FILE *entrada);
 
 int main(int argc, char const *argv[]) {
     // verifyArgc(argc);
@@ -21,6 +22,11 @@ int main(int argc, char const *argv[]) {
     readSourceName(entrada, source_name);
     printf("\n\nsource: %s\n", source_name);
 
+    int numNodes = readNumNodes(entrada);
+    printf("num = %d\n", numNodes);
+
+    fclose(entrada);
+
     return 0;
 }
 
@@ -31,5 +37,19 @@ void verifyArgc(int argc) {
 }
 
 void readSourceName(FILE *entrada, char *s) {
-    fscanf(entrada, "%s", s);
+    if (!entrada) return;
+    fscanf(entrada, "%[^\n]%*c", s);
+}
+
+int readNumNodes(FILE *entrada) {
+    if (!entrada) return -1;
+
+    int count = 0;
+    char buffer[1023];
+
+    while (fscanf(entrada, "%[^\n]%*c", &buffer) == 1) {
+        count++;
+    }
+
+    return count;
 }
