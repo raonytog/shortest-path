@@ -41,6 +41,8 @@ void destroyNode(Node *node) {
     if (!node) return;
 
     free(node->name);
+    free(node->adj);
+    free(node);
 }
 
 int compare(Node *n, Node *m) {

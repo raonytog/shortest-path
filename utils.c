@@ -47,3 +47,16 @@ Node **readNodes(FILE *input, int qtdNode) {
     }
     return nodes;
 }
+
+void destroyNodes(Node **nodes, int numNodes) {
+    for(int i = 0; i < numNodes; i++) {
+        destroyNode(nodes[i]);
+    }
+    free(nodes);
+}
+
+void printNodes(Node **nodes, int numNodes) { 
+    for(int i = 0; i < numNodes; i++) {
+        printNode(nodes[i]);
+    }
+}

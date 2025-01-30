@@ -6,8 +6,10 @@ all:
 	bin/prog
 
 comp:
+	clear
 	gcc *.c -o bin/prog
 
-valg: 
+val:
+	clear
 	make comp
-	valgrind prog
+	valgrind bin/prog

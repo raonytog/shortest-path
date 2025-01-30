@@ -10,7 +10,7 @@ int main(int argc, char const *argv[]) {
     // char path[100];
     // strcpy(path, argv[1]);
 
-    char path[100] = "casos_teste_v3/caso_teste_muito_pequeno_1.txt";
+    char path[100] = "casos_teste_v3/caso_teste_muito_pequeno_2.txt";
     FILE *input = NULL;
     input = fopen(path, "r");
 
@@ -19,11 +19,9 @@ int main(int argc, char const *argv[]) {
     numNodes = readNumNodes(input);
     
     Node **nodes = readNodes(input, numNodes);
-    for(int i = 0; i < numNodes; i++) {
-        printNode(nodes[i]);
-    }
+    printNodes(nodes, numNodes);
 
+    destroyNodes(nodes, numNodes);
     fclose(input);
-
     return 0;
 }
