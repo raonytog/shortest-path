@@ -1,7 +1,7 @@
 #ifndef _NODE_H_
 #define _NODE_H_
 
-#include "includes/edge.h"
+#include "edge.h"
 
 typedef struct Node Node;
 
@@ -9,6 +9,8 @@ typedef struct Node Node;
 Node *createNode();
 
 void destroyNode(Node *node);
+
+int compare(Node *n, Node *m);
 
 /** getters */
 char* getNodeName(Node *node);

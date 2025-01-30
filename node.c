@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "includes/node.h"
+#include "node.h"
 
 struct Node {
     char *name;
@@ -12,7 +12,7 @@ struct Node {
 };
 
 Node *createNode() {
-
+    return NULL;
 }
 
 void destroyNode(Node *node) {
@@ -24,27 +24,31 @@ void destroyNode(Node *node) {
     }
 }
 
+int compare(Node *n, Node *m) {
+    return n->distance - m->distance;
+}
+
 char* getNodeName(Node *node) {
-    if (!node) return;
+    if (!node) return NULL;
     return node->name;
 }
 
 Node* getNodeFather(Node *node) {
-    if (!node) return;
+    if (!node) return NULL;
     return node->father;
 }
 
 int getNodeDistance(Node *node) {
-    if (!node) return;
+    if (!node) return 0;
     return node->distance;
 }
 
 Edge** getNodeEdges(Node *node) {
-    if (!node) return;
+    if (!node) return NULL;
     return node->edges;
 }
 
 int getNumEdges(Node *node) {
-    if (!node) return;
+    if (!node) return 0;
     return node->numEdges;
 }

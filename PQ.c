@@ -1,10 +1,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "event.h"
 #include "PQ.h"
 
-#define exch(A, B) { Event *t = A; A = B; B = t; } /* troca os valores de A e B*/
+#define exch(A, B) { Node *t = A; A = B; B = t; } /* troca os valores de A e B*/
 #define compexch(A, B) if (less(B, A)) exch(A, B) /* se B for menor que A, troca os valores */
 
 static int PQ_max_size(PQ *pq);
@@ -12,7 +11,7 @@ static void fix_up(PQ *pq, int N);
 static void fix_down(PQ *pq, int size, int N);
 
 struct pq {
-    Event **array;
+    Node **array;
     int max_size;
     int current_size;
 };
@@ -23,7 +22,7 @@ PQ* PQ_create(int max_N) {
     PQ *queue = malloc(sizeof(PQ));
     queue->max_size = max_N;
     queue->current_size = 0;
-    queue->array = malloc(max_N * sizeof(Event**));
+    queue->array = malloc(max_N * sizeof(Node**));
 
     return queue;
 }
@@ -36,7 +35,7 @@ void PQ_destroy(PQ *pq) {
     free(pq);
 }
 
-void PQ_insert(PQ *pq, Event *e) {
+void PQ_insert(PQ *pq, Node *e) {
     if (!pq || !e) return;
     if (PQ_size(pq) == PQ_max_size(pq)) { printf("PQ is full\n"); return; }
 
@@ -45,13 +44,13 @@ void PQ_insert(PQ *pq, Event *e) {
     fix_up(pq, PQ_size(pq));
 }
 
-Event* PQ_delmin(PQ *pq) {
+Node* PQ_delmin(PQ *pq) {
     if (!pq || PQ_size(pq) == 0) { 
         printf("PQ does not exist or pq size is 0!\n"); 
         return NULL; 
     }
 
-    Event *min = pq->array[1];
+    Node *min = pq->array[1];
     exch(pq->array[PQ_size(pq)], pq->array[1]);
     pq->current_size--;
 

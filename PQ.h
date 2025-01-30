@@ -1,7 +1,9 @@
 #ifndef PQ_H
 #define PQ_H
+#include "node.h"
 
 typedef struct pq PQ;
+
 
 /*
  * Cria uma nova fila de prioridade mínima com o limite de elementos informado.
@@ -16,12 +18,12 @@ void PQ_destroy(PQ *pq);
 /*
  * Insere o evento na fila segundo o seu tempo.
  */
-void PQ_insert(PQ *pq, Event *e);
+void PQ_insert(PQ *pq, Node *e);
 
 /*
  * Remove e retorna o evento mais próximo.
  */
-Event* PQ_delmin(PQ *pq);
+Node* PQ_delmin(PQ *pq);
 
 /*
  * Testa se a fila está vazia.

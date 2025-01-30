@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "node.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "edge.h": "c",
+        "pq.h": "c"
     }
 }

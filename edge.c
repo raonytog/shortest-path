@@ -8,7 +8,7 @@ struct Edge {
 };
 
 Edge* createEdge(Node *source, Node *destine, int weight) {
-    if (!source || !destine || weight < 0) return;
+    if (!source || !destine || weight < 0) return NULL;
 
     Edge *new = malloc(sizeof(Edge));
     new->source = source;
