@@ -27,20 +27,31 @@ int readNumNodes(FILE *input) {
 Node **readNodes(FILE *input, int qtdNode) {
     if (!input || qtdNode < 0) return NULL;
 
-    char name[20]; int distance;
+    char name[20] = "\n", bomba[10] = "\n";
+    float distance = 0;
+
     rewind(input);
-    fscanf(input, "%[^\n]%*c", name);
+    fscanf(input, "%[^\n]%*c", name); /* node source, ja lido anteriormente*/
 
     Node **nodes = malloc(qtdNode * sizeof(Node*));
+    if (!nodes) { printf("Nodes nao foram inicializados!\n"); exit(EXIT_FAILURE); }
+
     for (int i = 0; i < qtdNode; i++) {
         fscanf(input, "%[^,],", name);
-        
+
         Node *new = createNode(name, i, qtdNode);
         for (int j = 0; j < qtdNode; j++) {
-            if (i == j) setNodeAdj(new, j, 0);
-            else {
-                fscanf(input, " %d%*c", &distance);
-                setNodeAdj(new, j, distance);
+            /** define a distance do node para ele mesmo */
+            if (i == j) { setNodeAdj(new, j, 0);
+            } else {
+                /** tenta ler um numero */
+                if (fscanf(input, " %f", &distance) == 1) { setNodeAdj(new, j, distance); }
+
+                /** trata a bomba */
+                else { fscanf(input, "%s", bomba); setNodeAdj(new, j, 0); }
+
+                /** ignora as vírgulas e espaços */ 
+                fscanf(input, "%*[ \n,]");
             }
         }
         nodes[i] = new;
@@ -60,3 +71,4 @@ void printNodes(Node **nodes, int numNodes) {
         printNode(nodes[i]);
     }
 }
+

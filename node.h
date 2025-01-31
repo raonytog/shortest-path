@@ -4,7 +4,7 @@
 typedef struct Node Node;
 
 /** basics */
-Node *createNode();
+Node *createNode(char *name, int idx, int qtdNodes);
 
 void printNode(Node *node);
 
@@ -22,6 +22,6 @@ int getNodeDistance(Node *node);
 int* getNodeAdjList(Node *node);
 
 /** setters */
-void setNodeAdj(Node *node, int idx, int distance);
+void setNodeAdj(Node *node, int idx, float distance);
 
 #endif // !_NODE_H_
