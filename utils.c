@@ -6,9 +6,10 @@ void verifyArgc(int argc) {
     exit(1);
 }
 
-void readSourceName(FILE *input, char *s) {
+void readSourceName(FILE *input, char *s, int *source_idx) {
     if (!input) return;
-    fscanf(input, "%[^\n]%*c", s);
+    fscanf(input, "%[^_]_%d%*c", s, source_idx);
+    printf("%d\n", *source_idx);
 }
 
 int readNumNodes(FILE *input) {
@@ -71,4 +72,3 @@ void printNodes(Node **nodes, int numNodes) {
         printNode(nodes[i]);
     }
 }
-

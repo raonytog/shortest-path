@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include "node.h"
+#include "PQ.h"
 
 struct Node {
     char *name;
@@ -76,7 +77,7 @@ int getNodeDistance(Node *node) {
     return node->distance;
 }
 
-int* getNodeAdjList(Node *node) {
+float* getNodeAdjList(Node *node) {
     if (!node) return 0;
     return node->adj;
 }
@@ -85,6 +86,4 @@ void setNodeAdj(Node *node, int idx, float distance) {
     if (!node || idx < 0 || distance < 0) return;
     node->adj[idx] = distance;
 }
-
-
 

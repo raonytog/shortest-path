@@ -19,7 +19,7 @@ Node* getNodeFather(Node *node);
 
 int getNodeDistance(Node *node);
 
-int* getNodeAdjList(Node *node);
+float* getNodeAdjList(Node *node);
 
 /** setters */
 void setNodeAdj(Node *node, int idx, float distance);

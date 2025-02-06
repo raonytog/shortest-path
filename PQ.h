@@ -1,6 +1,8 @@
 #ifndef PQ_H
 #define PQ_H
+
 #include "node.h"
+#include <stdbool.h>
 
 typedef struct pq PQ;
 
