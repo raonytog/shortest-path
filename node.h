@@ -3,8 +3,6 @@
 
 typedef struct Node Node;
 
-#define MAX 9999999999999999999
-
 /** basics */
 Node *createNode(char *name, int idx, int qtdNodes);
 

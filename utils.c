@@ -1,3 +1,5 @@
+#define MAX 9999999
+
 #include "utils.h"
 #include "PQ.h"
 
@@ -12,7 +14,6 @@ void readSourceName(FILE *input, char *s, int *source_idx) {
     if (!input) return;
 
     fscanf(input, "%[^_]_%d%*c", s, source_idx);
-    printf("%d\n", *source_idx);
 }
 
 int readNumNodes(FILE *input) {
@@ -82,7 +83,7 @@ void printNodes(Node **nodes, int numNodes) {
 }
 
 void dijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
-    if (!nodes || numNodes < 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
+    if (!nodes || numNodes <= 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
 
     setNodeDistance(nodes[sourceIdx], 0);
 
@@ -92,9 +93,17 @@ void dijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
     while (!PQ_is_empty(queue)) {
         Node *removido = PQ_delmin(queue);
 
-        
+        float *adj = getNodeAdjList(removido);
+        for (int i = 0; i < numNodes; i++) {
+            if (adj[i] <= 0) continue;
 
-
+            float peso = adj[i];
+            if (getNodeDistance(removido) + peso < getNodeDistance(nodes[i])) {
+                setNodeDistance(nodes[i], getNodeDistance(removido) + peso);
+                setNodeFather(nodes[i], removido);
+                PQ_insert(queue, nodes[i]);
+            }
+        }
     }
 
     PQ_destroy(queue);
