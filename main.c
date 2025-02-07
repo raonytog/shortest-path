@@ -13,11 +13,12 @@ int main(int argc, char const *argv[]) {
     FILE *input = NULL;
     input = fopen(path, "r");
 
-    char source_name[20];   int source_idx = 0, numNodes = 0;
-    readSourceName(input, source_name, &source_idx);
+    char sourceName[20];   int sourceIdx = 0, numNodes = 0;
+    readSourceName(input, sourceName, &sourceIdx);
     numNodes = readNumNodes(input);
     
     Node **nodes = readNodes(input, numNodes);
+    dijkstraPQ(nodes, numNodes, sourceIdx);
 
     destroyNodes(nodes, numNodes);
     fclose(input);

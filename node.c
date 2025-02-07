@@ -24,7 +24,7 @@ Node *createNode(char *name, int idx, int qtdNodes) {
     new->idx = idx;
 
     new->father = NULL;
-    new->distance = 0;
+    new->distance = MAX;
 
     new->adj = malloc(qtdNodes * sizeof(float));
     new->adjSize = qtdNodes;
@@ -59,31 +59,43 @@ void destroyNode(Node *node) {
 }
 
 int compare(Node *n, Node *m) {
+    if (!n || !m) exit(EXIT_FAILURE);
     return n->distance - m->distance;
 }
 
 char* getNodeName(Node *node) {
     if (!node) return NULL;
+
     return node->name;
 }
 
 Node* getNodeFather(Node *node) {
     if (!node) return NULL;
+
     return node->father;
 }
 
 int getNodeDistance(Node *node) {
     if (!node) return 0;
+
     return node->distance;
 }
 
 float* getNodeAdjList(Node *node) {
     if (!node) return 0;
+
     return node->adj;
 }
 
 void setNodeAdj(Node *node, int idx, float distance) {
     if (!node || idx < 0 || distance < 0) return;
+
     node->adj[idx] = distance;
 }
+
+void setNodeAdj(Node *node, int idx, float distance);
+
+void setNodeFather(Node *node, Node *father);
+
+void setNodeDistance(Node *node, float distance);
 

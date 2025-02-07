@@ -17,5 +17,11 @@ void destroyNodes(Node **nodes, int numNodes);
 
 void printNodes(Node **nodes, int numNodes);
 
+void dijkstraPQ(Node **nodes, int numNodes, int sourceIdx);
+
+void dijkstraLL(Node **nodes, int numNodes, int sourceIdx);
+
+void printDijkstraPath(Node **nodes, int numNodes);
+
 
 #endif

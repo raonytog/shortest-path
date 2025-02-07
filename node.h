@@ -3,6 +3,8 @@
 
 typedef struct Node Node;
 
+#define MAX 9999999999999999999
+
 /** basics */
 Node *createNode(char *name, int idx, int qtdNodes);
 
@@ -23,5 +25,9 @@ float* getNodeAdjList(Node *node);
 
 /** setters */
 void setNodeAdj(Node *node, int idx, float distance);
+
+void setNodeFather(Node *node, Node *father);
+
+void setNodeDistance(Node *node, float distance);
 
 #endif // !_NODE_H_

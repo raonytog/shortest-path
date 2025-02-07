@@ -1,13 +1,16 @@
 #include "utils.h"
+#include "PQ.h"
 
 void verifyArgc(int argc) { 
     if (argc > 1) return;
+
     printf("ERRO: diretorio de arquivos nao informado\n");
     exit(1);
 }
 
 void readSourceName(FILE *input, char *s, int *source_idx) {
     if (!input) return;
+
     fscanf(input, "%[^_]_%d%*c", s, source_idx);
     printf("%d\n", *source_idx);
 }
@@ -61,6 +64,9 @@ Node **readNodes(FILE *input, int qtdNode) {
 }
 
 void destroyNodes(Node **nodes, int numNodes) {
+    if (!nodes || numNodes < 0) return;
+
+
     for(int i = 0; i < numNodes; i++) {
         destroyNode(nodes[i]);
     }
@@ -68,7 +74,36 @@ void destroyNodes(Node **nodes, int numNodes) {
 }
 
 void printNodes(Node **nodes, int numNodes) { 
+    if (!nodes || numNodes < 0) return;
+
     for(int i = 0; i < numNodes; i++) {
         printNode(nodes[i]);
     }
+}
+
+void dijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
+    if (!nodes || numNodes < 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
+
+    setNodeDistance(nodes[sourceIdx], 0);
+
+    PQ *queue = PQ_create(MAX);
+    PQ_insert(queue, nodes[sourceIdx]);
+
+    while (!PQ_is_empty(queue)) {
+        Node *removido = PQ_delmin(queue);
+
+        
+
+
+    }
+
+    PQ_destroy(queue);
+}
+
+void dijkstraLL(Node **nodes, int numNodes, int sourceIdx) {
+    if (!nodes || numNodes < 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
+}
+
+void printDijkstraPath(Node **nodes, int numNodes) {
+    if (!nodes || numNodes < 0) return;
 }

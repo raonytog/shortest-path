@@ -6,7 +6,6 @@
 
 typedef struct pq PQ;
 
-
 /*
  * Cria uma nova fila de prioridade mínima com o limite de elementos informado.
  */
