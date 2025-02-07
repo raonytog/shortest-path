@@ -10,14 +10,14 @@ void printNode(Node *node);
 
 void destroyNode(Node *node);
 
-int compare(Node *n, Node *m);
+int compare(const void *n, const void *m);
 
 /** getters */
 char* getNodeName(Node *node);
 
 Node* getNodeFather(Node *node);
 
-int getNodeDistance(Node *node);
+float getNodeDistance(Node *node);
 
 float* getNodeAdjList(Node *node);
 

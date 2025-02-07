@@ -60,9 +60,12 @@ void destroyNode(Node *node) {
     free(node);
 }
 
-int compare(Node *n, Node *m) {
+int compare(const void *n, const void *m) {
     if (!n || !m) exit(EXIT_FAILURE);
-    return n->distance - m->distance;
+
+    Node *a = *(Node **)n;
+    Node *b = *(Node **)m;
+    return getNodeDistance(a) - getNodeDistance(b);
 }
 
 char* getNodeName(Node *node) {
@@ -75,7 +78,7 @@ Node* getNodeFather(Node *node) {
     return node->father;
 }
 
-int getNodeDistance(Node *node) {
+float getNodeDistance(Node *node) {
     if (!node) return 0;
     return node->distance;
 }

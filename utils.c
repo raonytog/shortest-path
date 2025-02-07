@@ -113,6 +113,26 @@ void dijkstraLL(Node **nodes, int numNodes, int sourceIdx) {
     if (!nodes || numNodes < 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
 }
 
+void printNodeParentChain(Node *node) {
+    if (!node) return;
+    printf("%s", getNodeName(node));
+    if (getNodeFather(node)) printf(" <- ");
+    printNodeParentChain(getNodeFather(node));
+}
+
 void printDijkstraPath(Node **nodes, int numNodes) {
     if (!nodes || numNodes < 0) return;
+
+    qsort(nodes, numNodes, sizeof(Node*), compare);
+
+    /** Source node */
+    printf("SHORTEST PATH TO %s: ", getNodeName(nodes[0]));
+    printf("%s <- %s (Distance: %.2f)\n", 
+        getNodeName(nodes[0]), getNodeName(nodes[0]), getNodeDistance(nodes[0]));
+
+    for (int i = 1; i < numNodes; i++) {
+        printf("SHORTEST PATH TO %s: ", getNodeName(nodes[i]));
+        printNodeParentChain(nodes[i]);
+        printf(" (Distance: %.2f)\n", getNodeDistance(nodes[i]));
+    }
 }
