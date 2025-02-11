@@ -7,7 +7,7 @@
 
 void verifyArgc(int argc);
 
-void readSourceName(FILE *input, char *s, int *source_idx);
+void readSourceName(FILE *input, char *sourceName, int *source_idx);
 
 int readNumNodes(FILE *input);
 

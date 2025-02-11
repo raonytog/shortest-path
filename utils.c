@@ -1,4 +1,4 @@
-#define MAX 9999999
+#define MAX 100000
 
 #include "utils.h"
 #include "PQ.h"
@@ -10,17 +10,17 @@ void verifyArgc(int argc) {
     exit(1);
 }
 
-void readSourceName(FILE *input, char *s, int *source_idx) {
+void readSourceName(FILE *input, char *sourceName, int *source_idx) {
     if (!input) return;
 
-    fscanf(input, "%[^_]_%d%*c", s, source_idx);
+    fscanf(input, "%[^_]_%d%*c", sourceName, source_idx);
 }
 
 int readNumNodes(FILE *input) {
     if (!input) return -1;
 
     int count = 0;
-    char buffer[1023];
+    char buffer[MAX];
 
     while (fscanf(input, "%[^\n]%*c", buffer) == 1) {
         count++;
