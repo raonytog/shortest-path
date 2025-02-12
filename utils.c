@@ -120,6 +120,13 @@ void printNodeParentChain(Node *node) {
     printNodeParentChain(getNodeFather(node));
 }
 
+void fprintNodeParentChain(FILE *output, Node *node) {
+    if (!node || !output) return;
+    fprintf(output, "%s", getNodeName(node));
+    if (getNodeFather(node)) fprintf(output, " <- ");
+    fprintNodeParentChain(output, getNodeFather(node));
+}
+
 void printDijkstraPath(Node **nodes, int numNodes) {
     if (!nodes || numNodes < 0) return;
 
@@ -134,5 +141,30 @@ void printDijkstraPath(Node **nodes, int numNodes) {
         printf("SHORTEST PATH TO %s: ", getNodeName(nodes[i]));
         printNodeParentChain(nodes[i]);
         printf(" (Distance: %.2f)\n", getNodeDistance(nodes[i]));
+    }
+}
+
+void printDijkstraPathFile(Node **nodes, int numNodes, char *path) {
+    if (!nodes || numNodes < 0) return;
+
+    FILE *output = fopen(path, "w");
+
+    if (!output)
+    {
+        printf("Erro ao abrir o arquivo %s\n", path);
+        return;
+    }
+    
+    qsort(nodes, numNodes, sizeof(Node*), compare);
+
+    /** Source node */
+    fprintf(output, "SHORTEST PATH TO %s: ", getNodeName(nodes[0]));
+    fprintf(output, "%s <- %s (Distance: %.2f)\n", 
+        getNodeName(nodes[0]), getNodeName(nodes[0]), getNodeDistance(nodes[0]));
+
+    for (int i = 1; i < numNodes; i++) {
+        fprintf(output, "SHORTEST PATH TO %s: ", getNodeName(nodes[i]));
+        fprintNodeParentChain(output, nodes[i]);
+        fprintf(output, " (Distance: %.2f)\n", getNodeDistance(nodes[i]));
     }
 }

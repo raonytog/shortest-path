@@ -23,5 +23,6 @@ void dijkstraLL(Node **nodes, int numNodes, int sourceIdx);
 
 void printDijkstraPath(Node **nodes, int numNodes);
 
+void printDijkstraPathFile(Node **nodes, int numNodes, char *path);
 
 #endif
