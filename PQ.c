@@ -59,7 +59,7 @@ Node* PQ_delmin(PQ *pq) {
     pq->current_size--;
 
     fix_down(pq, PQ_size(pq), 1);
-
+    
     return min;
 }
 
