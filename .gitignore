@@ -1,5 +1,9 @@
 # pasta com os casos teste
 /casos_teste_v3
+/bin/main
+/bin/node
+/bin/PQ
+/bin/utils
 
 
 # Prerequisites

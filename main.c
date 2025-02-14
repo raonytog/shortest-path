@@ -11,8 +11,7 @@ int main(int argc, char const *argv[]) {
     // strcpy(path, argv[1]);
 
     char path[100] = "casos_teste_v3/caso_teste_muito_pequeno_2.txt";
-    FILE *input = NULL;
-    input = fopen(path, "r");
+    FILE *input = fopen(path, "r");
 
     clock_t start = clock();
     char sourceName[20];   int sourceIdx = 0, numNodes = 0;
@@ -20,6 +19,7 @@ int main(int argc, char const *argv[]) {
     numNodes = readNumNodes(input);
     
     Node **nodes = readNodes(input, numNodes);
+    //dijkstraPQ(nodes, numNodes, sourceIdx);
     newDijkstraPQ(nodes, numNodes, sourceIdx);
     printDijkstraPathFile(nodes, numNodes, "saida.txt");
 

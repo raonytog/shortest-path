@@ -40,6 +40,6 @@ int PQ_size(PQ *pq);
 /*
  * Função auxiliar para diminuir a chave de um elemento na fila.
  */
-void decrease_key(PQ *pq, int i, int decrement);
+void decrease_key(PQ *pq, int i, float new_distance);
 
 #endif

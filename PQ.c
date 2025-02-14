@@ -52,7 +52,7 @@ Node* PQ_delmin(PQ *pq) {
     }
 
     Node *min = pq->array[1];
-    setNodePQIdx(min, -1);
+    setNodePQIdx(min, PQ_size(pq));
     exch(pq->array[PQ_size(pq)], pq->array[1]);
     setNodePQIdx(pq->array[1], 1);
 
@@ -84,8 +84,8 @@ static void fix_up(PQ *pq, int N) {
     while (N > 1 && compare(pq->array[N/2], pq->array[N]) > 0) {
         exch(pq->array[N], pq->array[N/2]);
 
+        setNodePQIdx(pq->array[N/2], N/2);
         setNodePQIdx(pq->array[N], N);
-        setNodePQIdx(pq->array[N/2], N / 2);
 
         N = N/2;
     }
@@ -112,8 +112,9 @@ static void fix_down(PQ *pq, int size, int N) {
     }
 }
 
-void decrease_key(PQ *pq, int i, int new_distance) {
-    if (!pq || i <= 0 || i > PQ_size(pq)) {
+void decrease_key(PQ *pq, int i, float new_distance) {
+    if (!pq || i <= 0) {
+    // if (!pq || i <= 0 || i > PQ_size(pq)) {
         printf("PQ does not exist or i is out of bounds!\n");
         return;
     }

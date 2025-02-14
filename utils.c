@@ -114,9 +114,7 @@ void newDijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
     if (!nodes || numNodes <= 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
 
     setNodeDistance(nodes[sourceIdx], 0);
-
     PQ *queue = PQ_create(numNodes);
-
     for (int i = 0; i < numNodes; i++)
         PQ_insert(queue, nodes[i]);
 
@@ -127,21 +125,23 @@ void newDijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
 
         float *adj = getNodeAdjList(removido);
         for (int i = 0; i < numNodes; i++) {
-            printf(" %d: ", i);
-            for (int i = 0; i < numNodes; i++)
-                printf("%d (%.0f) ", getNodePQIdx(nodes[i]), getNodeDistance(nodes[i]));
-            printf("\n");
+            // printf(" %d: ", i);
+            // for (int i = 0; i < numNodes; i++)
+            //     printf("%d (%.0f) ", getNodePQIdx(nodes[i]), getNodeDistance(nodes[i]));
+            // printf("\n");
 
             //printf("%s ", getNodeName(nodes[i]));
             //printf("(%f) vs (%d)", adj[i], getNodePQIdx(nodes[i]));
-            if (adj[i] <= 0 || getNodePQIdx(nodes[i]) < 0) continue;
+            // if (adj[i] <= 0 || getNodePQIdx(nodes[i]) < 0) continue;
+            if (adj[i] <= 0) continue;
 
             float peso = adj[i];
 
             if (getNodeDistance(removido) + peso < getNodeDistance(nodes[i])) {
                 setNodeDistance(nodes[i], getNodeDistance(removido) + peso);
-                printf("%s ->", getNodeName(nodes[i]));
                 setNodeFather(nodes[i], removido);
+                // printf("%s ->", getNodeName(nodes[i]));
+
                 decrease_key(queue, getNodePQIdx(nodes[i]), getNodeDistance(nodes[i]));
             }
         }
