@@ -41,6 +41,7 @@ void PQ_insert(PQ *pq, Node *e) {
 
     pq->current_size++;
     pq->array[pq->current_size] = e;
+    setNodePQIdx(e, pq->current_size);
     fix_up(pq, PQ_size(pq));
 }
 
@@ -51,7 +52,10 @@ Node* PQ_delmin(PQ *pq) {
     }
 
     Node *min = pq->array[1];
+    setNodePQIdx(min, -1);
     exch(pq->array[PQ_size(pq)], pq->array[1]);
+    setNodePQIdx(pq->array[1], 1);
+
     pq->current_size--;
 
     fix_down(pq, PQ_size(pq), 1);
@@ -109,8 +113,14 @@ static void fix_down(PQ *pq, int size, int N) {
 }
 
 void decrease_key(PQ *pq, int i, int new_distance) {
-    if (!pq || i <= 0) return;
-    setNodeDistance(pq->array[i], new_distance);
+    if (!pq || i <= 0 || i > PQ_size(pq)) {
+        printf("PQ does not exist or i is out of bounds!\n");
+        return;
+    }
+
+    printf(" %s\n", getNodeName(pq->array[i]));
+
+    //setNodeDistance(pq->array[i], new_distance);
 
     fix_up(pq, i);
 }

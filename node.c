@@ -28,6 +28,7 @@ Node *createNode(char *name, int idx, int qtdNodes) {
 
     new->father = NULL;
     new->distance = INFINITY;
+    new->PQ_idx = -1;
 
     new->adj = malloc(qtdNodes * sizeof(float));
     new->adjSize = qtdNodes;
@@ -54,7 +55,7 @@ void printNode(Node *node) {
 }
 
 void setNodePQIdx(Node *node, int idx) {
-    if (!node || idx < 0) return;
+    if (!node) return;
     node->PQ_idx = idx;
 }
 
