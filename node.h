@@ -8,6 +8,10 @@ Node *createNode(char *name, int idx, int qtdNodes);
 
 void printNode(Node *node);
 
+void setNodePQIdx(Node *node, int idx);
+
+int getNodePQIdx(Node *node);
+
 void destroyNode(Node *node);
 
 int compare(const void *n, const void *m);
