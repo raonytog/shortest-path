@@ -77,7 +77,11 @@ int compare(const void *n, const void *m) {
 
     Node *a = *(Node **)n;
     Node *b = *(Node **)m;
-    return getNodeDistance(a) - getNodeDistance(b);
+
+    float numA = getNodeDistance(a), numB = getNodeDistance(b);
+    if (numA > numB) return 1;
+    else if (numA < numB) return -1;
+    else return 0;
 }
 
 char* getNodeName(Node *node) {

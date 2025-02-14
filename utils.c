@@ -83,38 +83,9 @@ void printNodes(Node **nodes, int numNodes) {
     }
 }
 
+
+
 void dijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
-    if (!nodes || numNodes <= 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
-
-    setNodeDistance(nodes[sourceIdx], 0);
-
-    PQ *queue = PQ_create(MAX);
-    PQ_insert(queue, nodes[sourceIdx]);
-
-    while (!PQ_is_empty(queue)) {
-        Node *removido = PQ_delmin(queue);
-
-        float *adj = getNodeAdjList(removido);
-        for (int i = 0; i < numNodes; i++) {
-            for (int i = 0; i < numNodes; i++)
-                printf("%d (%.0f) ", getNodePQIdx(nodes[i]), getNodeDistance(nodes[i]));
-            printf("\n");
-
-            if (adj[i] <= 0) continue;
-
-            float peso = adj[i];
-            if (getNodeDistance(removido) + peso < getNodeDistance(nodes[i])) {
-                setNodeDistance(nodes[i], getNodeDistance(removido) + peso);
-                setNodeFather(nodes[i], removido);
-                PQ_insert(queue, nodes[i]);
-            }
-        }
-    }
-
-    PQ_destroy(queue);
-}
-
-void newDijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
     if (!nodes || numNodes <= 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
 
     setNodeDistance(nodes[sourceIdx], 0);
@@ -125,17 +96,8 @@ void newDijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
     while (!PQ_is_empty(queue)) {
         Node *removido = PQ_delmin(queue);
 
-        //printf("REMOVIDO: %s, %f \n", getNodeName(removido), getNodeDistance(removido));
-
         float *adj = getNodeAdjList(removido);
         for (int i = 0; i < numNodes; i++) {
-            printf(" %d: ", i);
-            for (int i = 0; i < numNodes; i++)
-                printf("%d (%.0f) ", getNodePQIdx(nodes[i]), getNodeDistance(nodes[i]));
-            printf("\n");
-
-            //printf("%s ", getNodeName(nodes[i]));
-            //printf("(%f) vs (%d)", adj[i], getNodePQIdx(nodes[i]));
             if (adj[i] <= 0 || getNodePQIdx(nodes[i]) < 0) continue;
 
             float peso = adj[i];
@@ -143,7 +105,6 @@ void newDijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
             if (getNodeDistance(removido) + peso < getNodeDistance(nodes[i])) {
                 setNodeDistance(nodes[i], getNodeDistance(removido) + peso);
                 setNodeFather(nodes[i], removido);
-                // printf("%s ->", getNodeName(nodes[i]));
 
                 decrease_key(queue, getNodePQIdx(nodes[i]));
             }
@@ -193,8 +154,7 @@ void printDijkstraPathFile(Node **nodes, int numNodes, char *path) {
 
     FILE *output = fopen(path, "w");
 
-    if (!output)
-    {
+    if (!output) {
         printf("Erro ao abrir o arquivo %s\n", path);
         return;
     }
@@ -211,4 +171,6 @@ void printDijkstraPathFile(Node **nodes, int numNodes, char *path) {
         fprintNodeParentChain(output, nodes[i]);
         fprintf(output, " (Distance: %.2f)\n", getNodeDistance(nodes[i]));
     }
+
+    fclose(output);
 }

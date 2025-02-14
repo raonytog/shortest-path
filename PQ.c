@@ -81,7 +81,10 @@ static int PQ_max_size(PQ *pq) {
 }
 
 static int cmp(Node *a, Node *b) {
-    return getNodeDistance(a) - getNodeDistance(b);
+    float numA = getNodeDistance(a), numB = getNodeDistance(b);
+    if (numA > numB) return 1;
+    else if (numA < numB) return -1;
+    else return 0;
 }
 
 static void fix_up(PQ *pq, int N) {
@@ -121,8 +124,6 @@ void decrease_key(PQ *pq, int idx_heap) {
         printf("PQ does not exist or i is out of bounds!\n");
         return;
     }
-
-    printf(" %s\n", getNodeName(pq->array[idx_heap]));
 
     fix_up(pq, idx_heap);
 }

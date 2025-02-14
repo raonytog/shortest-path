@@ -9,6 +9,11 @@ comp:
 	clear
 	gcc -lm *.c -o bin/prog
 
+time:
+	clear
+	make comp
+	time bin/prog
+
 val:
 	clear
 	make comp
