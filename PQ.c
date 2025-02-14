@@ -20,9 +20,9 @@ PQ* PQ_create(int max_N) {
     if (max_N <= 0) return NULL;
 
     PQ *queue = malloc(sizeof(PQ));
-    queue->max_size = max_N;
+    queue->max_size = max_N + 1;
     queue->current_size = 0;
-    queue->array = malloc(max_N * sizeof(Node**));
+    queue->array = malloc((max_N + 1) * sizeof(Node**));
 
     return queue;
 }
@@ -79,6 +79,10 @@ static void fix_up(PQ *pq, int N) {
 
     while (N > 1 && compare(pq->array[N/2], pq->array[N]) > 0) {
         exch(pq->array[N], pq->array[N/2]);
+
+        setNodePQIdx(pq->array[N], N);
+        setNodePQIdx(pq->array[N/2], N / 2);
+
         N = N/2;
     }
 }
@@ -96,6 +100,17 @@ static void fix_down(PQ *pq, int size, int N) {
             break;
 
         exch(pq->array[N], pq->array[i]);
+
+        setNodePQIdx(pq->array[N], N);
+        setNodePQIdx(pq->array[i], i);
+
         N = i;
     }
+}
+
+void decrease_key(PQ *pq, int i, int new_distance) {
+    if (!pq || i <= 0) return;
+    setNodeDistance(pq->array[i], new_distance);
+
+    fix_up(pq, i);
 }

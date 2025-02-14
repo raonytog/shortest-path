@@ -36,4 +36,10 @@ bool PQ_is_empty(PQ *pq);
  */
 int PQ_size(PQ *pq);
 
+
+/*
+ * Função auxiliar para diminuir a chave de um elemento na fila.
+ */
+void decrease_key(PQ *pq, int i, int decrement);
+
 #endif

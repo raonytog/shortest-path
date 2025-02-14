@@ -4,8 +4,7 @@
 
 #include "node.h"
 #include "PQ.h"
-
-#define MAX 9999999
+#include <math.h>
 
 struct Node {
     char *name;
@@ -16,6 +15,8 @@ struct Node {
 
     float *adj;
     int adjSize;
+
+    int PQ_idx;
 };
 
 Node *createNode(char *name, int idx, int qtdNodes) {
@@ -26,7 +27,7 @@ Node *createNode(char *name, int idx, int qtdNodes) {
     new->idx = idx;
 
     new->father = NULL;
-    new->distance = MAX;
+    new->distance = INFINITY;
 
     new->adj = malloc(qtdNodes * sizeof(float));
     new->adjSize = qtdNodes;
@@ -50,6 +51,16 @@ void printNode(Node *node) {
     }
 
     printf("\n");
+}
+
+void setNodePQIdx(Node *node, int idx) {
+    if (!node || idx < 0) return;
+    node->PQ_idx = idx;
+}
+
+int getNodePQIdx(Node *node) {
+    if (!node) return -1;
+    return node->PQ_idx;
 }
 
 void destroyNode(Node *node) {

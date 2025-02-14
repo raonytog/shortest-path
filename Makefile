@@ -7,7 +7,7 @@ all:
 
 comp:
 	clear
-	gcc *.c -o bin/prog
+	gcc -lm *.c -o bin/prog
 
 val:
 	clear

@@ -2,6 +2,7 @@
 
 #include "utils.h"
 #include "PQ.h"
+#include <math.h>
 
 void verifyArgc(int argc) { 
     if (argc > 1) return;
@@ -102,6 +103,36 @@ void dijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
                 setNodeDistance(nodes[i], getNodeDistance(removido) + peso);
                 setNodeFather(nodes[i], removido);
                 PQ_insert(queue, nodes[i]);
+            }
+        }
+    }
+
+    PQ_destroy(queue);
+}
+
+void newDijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
+    if (!nodes || numNodes <= 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
+
+    setNodeDistance(nodes[sourceIdx], 0);
+
+    PQ *queue = PQ_create(numNodes);
+
+    for (int i = 0; i < numNodes; i++)
+        PQ_insert(queue, nodes[i]);
+
+    while (!PQ_is_empty(queue)) {
+        Node *removido = PQ_delmin(queue);
+
+        float *adj = getNodeAdjList(removido);
+        for (int i = 0; i < numNodes; i++) { 
+            if (adj[i] <= 0) continue;
+
+            float peso = adj[i];
+            if (getNodeDistance(removido) + peso < getNodeDistance(nodes[i])) {
+                setNodeDistance(nodes[i], getNodeDistance(removido) + peso);
+                setNodeFather(nodes[i], removido);
+
+                decrease_key(queue, getNodePQIdx(nodes[i]), getNodeDistance(nodes[i]));
             }
         }
     }
