@@ -6,10 +6,12 @@
 
 int main(int argc, char const *argv[]) {
     // verifyArgc(argc);
-    // char path[100];
+    // char path[100], saida[100];
     // strcpy(path, argv[1]);
+    // strcpy(saida, argv[2]);
 
     char path[100] = "casos_teste_v3/caso_teste_medio_4.txt";
+    char saida[100] = "saida.txt";
     FILE *input = fopen(path, "r");
 
     char sourceName[20];   int sourceIdx = 0, numNodes = 0;
@@ -18,7 +20,7 @@ int main(int argc, char const *argv[]) {
     
     Node **nodes = readNodes(input, numNodes);
     dijkstraPQ(nodes, numNodes, sourceIdx);
-    printDijkstraPathFile(nodes, numNodes, "saida.txt");
+    printDijkstraPathFile(nodes, numNodes, saida);
 
     destroyNodes(nodes, numNodes);
     fclose(input);

@@ -21,12 +21,12 @@ int readNumNodes(FILE *input) {
     if (!input) return -1;
 
     int count = 0;
-    char buffer[MAX];
-
-    while (fscanf(input, "%[^\n]%*c", buffer) == 1) {
-        count++;
+    char c;
+    while (fscanf(input, "%c", &c) == 1) {
+        if (c == ',') count++;
+        else if (c == '\n') break;
     }
-
+    count++;
     return count;
 }
 

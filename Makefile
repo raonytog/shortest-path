@@ -3,11 +3,16 @@ path = "casos_teste_v3/caso_teste_muito_pequeno_1.txt"
 all:
 	clear
 	make comp
-	bin/prog
+	make run
 
-comp:
+comp: *.c
 	clear
-	gcc -lm *.c -o bin/prog
+	@ gcc -lm *.c -o bin/prog
+
+run:
+	clear
+	make comp
+	@ bin/prog
 
 time:
 	clear
