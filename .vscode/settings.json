@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "node.h": "c",
-        "utils.h": "c"
+        "utils.h": "c",
+        "random": "c",
+        "*.tcc": "c",
+        "string": "c",
+        "string_view": "c"
     }
 }

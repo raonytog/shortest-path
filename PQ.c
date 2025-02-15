@@ -75,11 +75,17 @@ int PQ_size(PQ *pq) {
     return pq->current_size;
 }
 
+/** 
+ * Retorna o limite máximo possível da fila 
+ */
 static int PQ_max_size(PQ *pq) { 
     if (!pq) return 0;
     return pq->max_size;
 }
 
+/** 
+ * Compara a distancia entre dois nós
+ */
 static int cmp(Node *a, Node *b) {
     float numA = getNodeDistance(a), numB = getNodeDistance(b);
     if (numA > numB) return 1;
@@ -87,6 +93,9 @@ static int cmp(Node *a, Node *b) {
     else return 0;
 }
 
+/** 
+ * Arruma a heap order, empurrando os nós com maior prioridade para cima
+ */
 static void fix_up(PQ *pq, int N) {
     if (!pq || N <= 0) return;
 
@@ -100,6 +109,9 @@ static void fix_up(PQ *pq, int N) {
     }
 }
 
+/** 
+ * Arruma a heap order, empurrando os nós com menor prioridade para baixo
+ */
 static void fix_down(PQ *pq, int size, int N) {
     if (!pq || size <= 0 || N <= 0) return;
 

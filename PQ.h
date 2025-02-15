@@ -6,39 +6,51 @@
 
 typedef struct pq PQ;
 
-
-/*
- * Cria uma nova fila de prioridade mínima com o limite de elementos informado.
+ /**
+ * @brief Cria uma nova fila de prioridade mínima com o limite de elementos informado.
+ * @param max_N número máximo de elementos da fila
+ * @return fila de prioridade mínima
  */
 PQ* PQ_create(int max_N);
 
-/*
- * Libera a memória da fila.
+ /**
+ * @brief Libera a memória da fila.
+ * @param pq fila de prioridade mínima
  */
 void PQ_destroy(PQ *pq);
 
-/*
- * Insere o evento na fila segundo o seu tempo.
+ /**
+ * @brief Insere o evento na fila segundo a distância do nó inicial
+ * @param pq fila de prioridade mínima
+ * @param e node à inserir
  */
 void PQ_insert(PQ *pq, Node *e);
 
-/*
- * Remove e retorna o evento mais próximo.
+/**
+ * @brief Remove e retorna o evento mais próximo
+ * @param pq fila de prioridade mínima
+ * @return node removido com a maior prioridade
  */
 Node* PQ_delmin(PQ *pq);
 
-/*
- * Testa se a fila está vazia.
+/**
+ * @brief Testa se a fila está vazia.
+ * @param pq fila de prioridade mínima
+ * @return True se a fila estiver vazia, False se tiver pelo menos um item.
  */
 bool PQ_is_empty(PQ *pq);
-/*
- * Retorna o tamanho da fila.
+
+/**
+ * @brief Retorna o tamanho da fila.
+ * @param pq fila de prioridade mínima
+ * @return tamanho atual da fila
  */
 int PQ_size(PQ *pq);
 
-
-/*
- * Função auxiliar para diminuir a chave de um elemento na fila.
+ /**
+ * @brief Função auxiliar para diminuir a chave de um elemento na fila.
+ * @param pq fila de prioridade mínima
+ * @param idx_heap indice do nó na fila
  */
 void decrease_key(PQ *pq, int idx_heap);
 

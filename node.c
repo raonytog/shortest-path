@@ -72,7 +72,7 @@ void destroyNode(Node *node) {
     free(node);
 }
 
-int compare(const void *n, const void *m) {
+int compareFloat(const void *n, const void *m) {
     if (!n || !m) exit(EXIT_FAILURE);
 
     Node *a = *(Node **)n;

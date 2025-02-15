@@ -83,8 +83,6 @@ void printNodes(Node **nodes, int numNodes) {
     }
 }
 
-
-
 void dijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
     if (!nodes || numNodes <= 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
 
@@ -135,7 +133,7 @@ void fprintNodeParentChain(FILE *output, Node *node) {
 void printDijkstraPath(Node **nodes, int numNodes) {
     if (!nodes || numNodes < 0) return;
 
-    qsort(nodes, numNodes, sizeof(Node*), compare);
+    qsort(nodes, numNodes, sizeof(Node*), compareFloat);
 
     /** Source node */
     printf("SHORTEST PATH TO %s: ", getNodeName(nodes[0]));
@@ -159,7 +157,7 @@ void printDijkstraPathFile(Node **nodes, int numNodes, char *path) {
         return;
     }
     
-    qsort(nodes, numNodes, sizeof(Node*), compare);
+    qsort(nodes, numNodes, sizeof(Node*), compareFloat);
 
     /** Source node */
     fprintf(output, "SHORTEST PATH TO %s: ", getNodeName(nodes[0]));
