@@ -10,7 +10,7 @@ int main(int argc, char const *argv[]) {
     // strcpy(path, argv[1]);
     // strcpy(saida, argv[2]);
 
-    char path[100] = "casos_teste_v3/caso_pequeno_2.txt";
+    char path[100] = "casos_teste_v3/caso_teste_muito_pequeno_1.txt";
     char saida[100] = "saida.txt";
     FILE *input = fopen(path, "r");
 
