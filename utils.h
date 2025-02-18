@@ -58,6 +58,16 @@ void printNodes(Node **nodes, int numNodes);
  */
 void dijkstraPQ(Node **nodes, int numNodes, int sourceIdx);
 
+
+/**
+ * @brief Encontra o caminho mínimo a partir do nó inicial para todos os outros nós
+ * utilizando uma lista ordenada
+ * @param nodes array de nodes
+ * @param numNodes Quantidade de nós existentes
+ * @param sourceIdx indice do nó inicial
+ */
+void dijkstraList(Node **nodes, int numNodes, int sourceIdx);
+
 /**
  * @brief Encontra o caminho mínimo a partir do nó inicial para todos os outros nós
  * utulizando <??????>

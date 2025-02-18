@@ -1,5 +1,6 @@
 #include "list.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 struct cell {
     Node *data;
@@ -32,9 +33,11 @@ void insertNode(List *list, Node *node) {
         list->tail = new_cell;
     } else {
         Cell *aux = list->head;
+        Cell *prev = NULL;
 
         while (aux != NULL && getNodeDistance(aux->data) <= getNodeDistance(node)) {
-            aux = aux->next;
+            prev = aux;
+            aux = aux->next;   
         }
         if (aux == NULL) // Insere no final
         {
@@ -45,8 +48,8 @@ void insertNode(List *list, Node *node) {
                 new_cell->next = list->head;
                 list->head = new_cell;
             } else { // Insere no meio
-                new_cell->next = aux->next;
-                aux->next = new_cell;
+                prev->next = new_cell;
+                new_cell->next = aux;
             }
         }
     }
@@ -112,7 +115,7 @@ void destroyList(List *list) {
     free(list);
 }
 
-void decrease_key(List *list, Node *node) {
+void decreaseKeyList(List *list, Node *node) {
     if (!list || !node) return;
 
     Cell *aux = list->head;
@@ -122,4 +125,20 @@ void decrease_key(List *list, Node *node) {
 
     removeNode(list, node);
     insertNode(list, node);
+}
+
+int getListSize(List *list) {
+    if (!list) return 0;
+
+    return list->size;
+}
+
+void printList(List *list) {
+    if (!list) return;
+
+    Cell *aux = list->head;
+    while (aux != NULL) {
+        printf("%s %f\n", getNodeName(aux->data), getNodeDistance(aux->data));
+        aux = aux->next;
+    }
 }

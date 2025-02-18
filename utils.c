@@ -1,6 +1,7 @@
 #define MAX 100000
 
 #include "utils.h"
+#include "list.h"
 #include "PQ.h"
 #include <math.h>
 
@@ -110,6 +111,36 @@ void dijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
     }
 
     PQ_destroy(queue);
+}
+
+void dijkstraList(Node **nodes, int numNodes, int sourceIdx) {
+    if (!nodes || numNodes <= 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
+
+    List *list = createLista();
+    for (int i = 0; i < numNodes; i++) {
+        insertNode(list, nodes[i]);
+    }
+
+    setNodeDistance(nodes[sourceIdx], 0);
+    while (getListSize(list) > 0) {
+        Node *removido = popNode(list);
+
+        float *adj = getNodeAdjList(removido);
+        for (int i = 0; i < numNodes; i++) {
+            if (adj[i] <= 0) continue;
+
+            float peso = adj[i];
+
+            if (getNodeDistance(removido) + peso < getNodeDistance(nodes[i])) {
+                setNodeDistance(nodes[i], getNodeDistance(removido) + peso);
+                setNodeFather(nodes[i], removido);
+
+                decreaseKeyList(list, nodes[i]);
+            }
+        }
+    }
+
+    destroyList(list);
 }
 
 void dijkstraLL(Node **nodes, int numNodes, int sourceIdx) {
