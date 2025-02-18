@@ -20,6 +20,7 @@ int main(int argc, char const *argv[]) {
     
     Node **nodes = readNodes(input, numNodes);
     dijkstraList(nodes, numNodes, sourceIdx);
+    //dijkstraPQ(nodes, numNodes, sourceIdx);
     printDijkstraPathFile(nodes, numNodes, saida);
 
     destroyNodes(nodes, numNodes);
