@@ -50,34 +50,6 @@ void destroyNodes(Node **nodes, int numNodes);
 void printNodes(Node **nodes, int numNodes);
 
 /**
- * @brief Encontra o caminho mínimo a partir do nó inicial para todos os outros nós
- * utilizando uma min heap
- * @param nodes array de nodes
- * @param numNodes Quantidade de nós existentes
- * @param sourceIdx indice do nó inicial
- */
-void dijkstraPQ(Node **nodes, int numNodes, int sourceIdx);
-
-
-/**
- * @brief Encontra o caminho mínimo a partir do nó inicial para todos os outros nós
- * utilizando uma lista ordenada
- * @param nodes array de nodes
- * @param numNodes Quantidade de nós existentes
- * @param sourceIdx indice do nó inicial
- */
-void dijkstraList(Node **nodes, int numNodes, int sourceIdx);
-
-/**
- * @brief Encontra o caminho mínimo a partir do nó inicial para todos os outros nós
- * utulizando <??????>
- * @param nodes array de nodes
- * @param numNodes Quantidade de nós existentes
- * @param sourceIdx indice do nó inicial
- */
-void dijkstraLL(Node **nodes, int numNodes, int sourceIdx);
-
-/**
  * @brief Imprime o caminho mínimo de todos os nós no terminal
  * @param nodes array de nodes
  * @param numNodes Quantidade de nós existentes

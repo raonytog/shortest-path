@@ -1,9 +1,10 @@
 #define MAX 100000
 
+#include <math.h>
+
 #include "utils.h"
 #include "list.h"
 #include "PQ.h"
-#include <math.h>
 
 void verifyArgc(int argc) { 
     if (argc > 1) return;
@@ -82,69 +83,6 @@ void printNodes(Node **nodes, int numNodes) {
     for(int i = 0; i < numNodes; i++) {
         printNode(nodes[i]);
     }
-}
-
-void dijkstraPQ(Node **nodes, int numNodes, int sourceIdx) {
-    if (!nodes || numNodes <= 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
-
-    setNodeDistance(nodes[sourceIdx], 0);
-    PQ *queue = PQ_create(numNodes);
-    for (int i = 0; i < numNodes; i++)
-        PQ_insert(queue, nodes[i]);
-
-    while (!PQ_is_empty(queue)) {
-        Node *removido = PQ_delmin(queue);
-
-        float *adj = getNodeAdjList(removido);
-        for (int i = 0; i < numNodes; i++) {
-            if (adj[i] <= 0 || getNodePQIdx(nodes[i]) < 0) continue;
-
-            float peso = adj[i];
-
-            if (getNodeDistance(removido) + peso < getNodeDistance(nodes[i])) {
-                setNodeDistance(nodes[i], getNodeDistance(removido) + peso);
-                setNodeFather(nodes[i], removido);
-
-                decrease_key(queue, getNodePQIdx(nodes[i]));
-            }
-        }
-    }
-
-    PQ_destroy(queue);
-}
-
-void dijkstraList(Node **nodes, int numNodes, int sourceIdx) {
-    if (!nodes || numNodes <= 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
-
-    List *list = createLista();
-    for (int i = 0; i < numNodes; i++) {
-        insertNode(list, nodes[i]);
-    }
-
-    setNodeDistance(nodes[sourceIdx], 0);
-    while (getListSize(list) > 0) {
-        Node *removido = popNode(list);
-
-        float *adj = getNodeAdjList(removido);
-        for (int i = 0; i < numNodes; i++) {
-            if (adj[i] <= 0) continue;
-
-            float peso = adj[i];
-
-            if (getNodeDistance(removido) + peso < getNodeDistance(nodes[i])) {
-                setNodeDistance(nodes[i], getNodeDistance(removido) + peso);
-                setNodeFather(nodes[i], removido);
-
-                decreaseKeyList(list, nodes[i]);
-            }
-        }
-    }
-
-    destroyList(list);
-}
-
-void dijkstraLL(Node **nodes, int numNodes, int sourceIdx) {
-    if (!nodes || numNodes < 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
 }
 
 void printNodeParentChain(Node *node) {
