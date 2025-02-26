@@ -7,7 +7,8 @@
 #define exch(A, B) { Node *t = A; A = B; B = t; } /* troca os valores de A e B*/
 #define compexch(A, B) if (less(B, A)) exch(A, B) /* se B for menor que A, troca os valores */
 
-static int PQ_max_size(PQ *pq);
+static void pqPrint(PQ *pq);
+static int pqMaxSize(PQ *pq);
 static void fix_up(PQ *pq, int N);
 static void fix_down(PQ *pq, int size, int N);
 
@@ -17,7 +18,7 @@ struct pq {
     int current_size;
 };
 
-PQ* PQ_create(int max_N) {
+PQ* pqCreate(int max_N) {
     if (max_N <= 0) return NULL;
 
     PQ *queue = malloc(sizeof(PQ));
@@ -28,49 +29,49 @@ PQ* PQ_create(int max_N) {
     return queue;
 }
 
-void PQ_destroy(PQ *pq) {
+void pqDestroy(PQ *pq) {
     if (!pq) return;
 
-    for (int i = 0; i < PQ_size(pq); i++) { free(pq->array[i]); }
+    for (int i = 0; i < pqSize(pq); i++) { free(pq->array[i]); }
     free(pq->array);
     free(pq);
 }
 
-void PQ_insert(PQ *pq, Node *e) {
+void pqInsert(PQ *pq, Node *e) {
     if (!pq || !e) return;
-    if (PQ_size(pq) == PQ_max_size(pq)) { printf("PQ is full\n"); return; }
+    if (pqSize(pq) == pqMaxSize(pq)) { printf("PQ is full\n"); return; }
 
     pq->current_size++;
     pq->array[pq->current_size] = e;
     setNodePQIdx(e, pq->current_size);
 
-    fix_up(pq, PQ_size(pq));
+    fix_up(pq, pqSize(pq));
 }
 
-Node* PQ_delmin(PQ *pq) {
-    if (!pq || PQ_size(pq) == 0) { 
+Node* pqDelmin(PQ *pq) {
+    if (!pq || pqSize(pq) == 0) { 
         printf("PQ does not exist or pq size is 0!\n"); 
         return NULL; 
     }
 
     Node *min = pq->array[1];
     setNodePQIdx(min, -1);
-    exch(pq->array[PQ_size(pq)], pq->array[1]);
+    exch(pq->array[pqSize(pq)], pq->array[1]);
     setNodePQIdx(pq->array[1], 1);
 
     pq->current_size--;
 
-    fix_down(pq, PQ_size(pq), 1);
+    fix_down(pq, pqSize(pq), 1);
     
     return min;
 }
 
-bool PQ_is_empty(PQ *pq) {
+bool pqIsEmpty(PQ *pq) {
     if (!pq) return false;
     return pq->current_size == 0;
 }
 
-int PQ_size(PQ *pq) {
+int pqSize(PQ *pq) {
     if (!pq) return 0;
     return pq->current_size;
 }
@@ -78,7 +79,7 @@ int PQ_size(PQ *pq) {
 /** 
  * Retorna o limite máximo possível da fila 
  */
-static int PQ_max_size(PQ *pq) { 
+static int pqMaxSize(PQ *pq) { 
     if (!pq) return 0;
     return pq->max_size;
 }
@@ -131,8 +132,8 @@ static void fix_down(PQ *pq, int size, int N) {
     }
 }
 
-void decrease_key(PQ *pq, int idx_heap) {
-    if (!pq || idx_heap <= 0 || idx_heap > PQ_size(pq)) {
+void decreaseKey(PQ *pq, int idx_heap) {
+    if (!pq || idx_heap <= 0 || idx_heap > pqSize(pq)) {
         printf("PQ does not exist or i is out of bounds!\n");
         return;
     }
@@ -140,7 +141,7 @@ void decrease_key(PQ *pq, int idx_heap) {
     fix_up(pq, idx_heap);
 }
 
-void PQ_print(PQ *pq) {
+static void pqPrint(PQ *pq) {
     if (!pq) return;
 
     for(int i = 1; i < pq->current_size+1; i++) {
