@@ -1,3 +1,10 @@
+/**
+ * T1 TBO, professor: Luis Antonio de Souza Junior
+ * Alunos:
+ *      Barbara - 2023100254
+ *      Raony - 2023102512
+ */
+
 #include <stdio.h>
 
 #include "list.h"
@@ -13,7 +20,6 @@
 void djikstra(Node **nodes, int numNodes, int sourceIdx) {
     if (!nodes || numNodes <= 0 || (sourceIdx < 0 || sourceIdx >= numNodes)) return;
 
-    printf("Running djikstra with ordened list!\n");
     List *list = createLista();
     for (int i = 0; i < numNodes; i++) {
         insertNode(list, nodes[i]);

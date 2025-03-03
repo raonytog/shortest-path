@@ -1,3 +1,13 @@
+/**
+ * T1 TBO, professor: Luis Antonio de Souza Junior
+ * Alunos:
+ *      Barbara - 2023100254
+ *      Raony - 2023102512
+ */
+
+ #ifndef _LIST_H_
+ #define _LIST_H_
+
 #include "node.h"
 
 typedef struct cell Cell;
@@ -48,3 +58,5 @@ int getListSize(List *list);
  * @param list lists encadeada
  */
 void printList(List *list);
+
+#endif // !_LIST_H_

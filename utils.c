@@ -1,4 +1,9 @@
-#define MAX 100000
+/**
+ * T1 TBO, professor: Luis Antonio de Souza Junior
+ * Alunos:
+ *      Barbara - 2023100254
+ *      Raony - 2023102512
+ */
 
 #include <math.h>
 

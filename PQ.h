@@ -1,3 +1,10 @@
+/**
+ * T1 TBO, professor: Luis Antonio de Souza Junior
+ * Alunos:
+ *      Barbara - 2023100254
+ *      Raony - 2023102512
+ */
+
 #ifndef PQ_H
 #define PQ_H
 

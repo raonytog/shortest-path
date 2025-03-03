@@ -1,3 +1,11 @@
+
+/**
+ * T1 TBO, professor: Luis Antonio de Souza Junior
+ * Alunos:
+ *      Barbara - 2023100254
+ *      Raony - 2023102512
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +21,6 @@ int main(int argc, char const *argv[]) {
     strcpy(path, argv[1]);
     strcpy(saida, argv[2]);
 
-    clock_t start = clock();
     FILE *input = fopen(path, "r");
 
     char sourceName[20];   int sourceIdx = 0, numNodes = 0;
@@ -26,8 +33,5 @@ int main(int argc, char const *argv[]) {
 
     destroyNodes(nodes, numNodes);
     fclose(input);
-
-    clock_t end = clock();
-    printf("Time spent: %.4f\n", ((double)end - (double)start)/CLOCKS_PER_SEC);
     return 0;
 }
