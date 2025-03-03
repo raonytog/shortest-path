@@ -19,23 +19,26 @@ all:
 	make compPQ
 	make runPQ
 
+
 # Compila a fila de prioridade
-compPQ:
+compPQ: main.c PQ.c node.c utils.c djikstraPQ.c
 	@ gcc -lm main.c PQ.c node.c utils.c djikstraPQ.c -o bin/progPQ
 
 # Compila a lista
-compList:
+compList: main.c PQ.c node.c utils.c djikstraList.c
 	@ gcc -lm main.c list.c node.c utils.c djikstraList.c -o bin/progList
 
+
 # executa o codigo da fila de prioridade
-runPQ:
+runPQ: bin/progPQ
 	clear
 	@ bin/progPQ $(input) $(output)
 
 # executa o codigo da lista
-runList:
+runList: bin/progList
 	clear
 	@ bin/progList $(input) $(output)
+
 
 # valgrind da fila de prioridade
 valPQ:

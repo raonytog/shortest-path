@@ -37,17 +37,22 @@ void insertNode(List *list, Node *node) {
 
         while (aux != NULL && getNodeDistance(aux->data) <= getNodeDistance(node)) {
             prev = aux;
-            aux = aux->next;   
+            aux = aux->next;
         }
-        if (aux == NULL) // Insere no final
-        {
+
+        // Insere no final
+        if (aux == NULL) {
             list->tail->next = new_cell;
             list->tail = new_cell;
+
         } else {
-            if (aux == list->head) { // Insere no início
+             // Insere no início
+            if (aux == list->head) {
                 new_cell->next = list->head;
                 list->head = new_cell;
-            } else { // Insere no meio
+
+            // Insere no meio
+            } else {
                 prev->next = new_cell;
                 new_cell->next = aux;
             }
@@ -70,18 +75,12 @@ Node* removeNode(List *list, Node *node) {
 
     if (aux == NULL) return NULL;
 
-    if (prev == NULL) {
-        list->head = aux->next;
-    } else {
-        prev->next = aux->next;
-    }
+    if (prev == NULL) { list->head = aux->next;
+    } else { prev->next = aux->next; }
 
-    if (aux == list->tail) {
-        list->tail = prev;
-    }
+    if (aux == list->tail) { list->tail = prev; }
 
     list->size--;
-
     Node *data = aux->data;
     free(aux);
 

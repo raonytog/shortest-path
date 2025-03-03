@@ -141,6 +141,9 @@ void decreaseKey(PQ *pq, int idx_heap) {
     fix_up(pq, idx_heap);
 }
 
+/** 
+ * Imprime todo o conteudo da fila de prioridade
+*/
 static void pqPrint(PQ *pq) {
     if (!pq) return;
 
