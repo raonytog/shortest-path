@@ -28,6 +28,6 @@ int main(int argc, char const *argv[]) {
     fclose(input);
 
     clock_t end = clock();
-    printf("Time spent: %.2f\n", ((double)end - (double)start)/CLOCKS_PER_SEC);
+    printf("Time spent: %.4f\n", ((double)end - (double)start)/CLOCKS_PER_SEC);
     return 0;
 }

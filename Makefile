@@ -7,11 +7,11 @@ path5 = "casos_teste_v3/caso_teste_pequeno_3.txt"
 path6 = "casos_teste_v3/caso_teste_pequeno_4.txt"
 path7 = "casos_teste_v3/caso_teste_medio_1.txt"
 path8 = "casos_teste_v3/caso_teste_medio_2.txt"
-path8 = "casos_teste_v3/caso_teste_medio_3.txt"
-path8 = "casos_teste_v3/caso_teste_medio_4.txt"
+path9 = "casos_teste_v3/caso_teste_medio_3.txt"
+path10 = "casos_teste_v3/caso_teste_medio_4.txt"
 
 # entrada e saida
-input = $(path8)
+input = $(path9)
 output = "saida.txt"
 
 all:
@@ -41,13 +41,22 @@ runList: bin/progList
 
 
 # valgrind da fila de prioridade
-valPQ:
+valpq:
 	clear
 	make compPQ
 	valgrind bin/progPQ $(input) $(output)
 
 # valgrind da lista
-valList:
+vallist:
 	clear
 	make compList
 	valgrind bin/progList $(input) $(output)
+
+
+pq:
+	make compPQ
+	make runPQ
+
+list:
+	make compList
+	make runList
