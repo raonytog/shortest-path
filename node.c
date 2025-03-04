@@ -15,15 +15,15 @@
 
 struct Node {
     char *name;
-    int idx;
+    int idx;         /** respectivo ao indice presente no nome */
 
     Node *father;
-    float distance;
+    float distance;  /** distancia com respeito ao nó fonte */
 
-    float *adj;
+    float *adj;      /** lista de adjacencia */
     int adjSize;
 
-    int PQ_idx;
+    int PQ_idx;      /** caso não esteja na fila, representado com -1 */
 };
 
 Node *createNode(char *name, int idx, int qtdNodes) {

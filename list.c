@@ -38,6 +38,7 @@ void insertNode(List *list, Node *node) {
     if (list->size == 0) {
         list->head = new_cell;
         list->tail = new_cell;
+        
     } else {
         Cell *aux = list->head;
         Cell *prev = NULL;

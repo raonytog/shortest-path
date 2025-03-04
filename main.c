@@ -22,6 +22,7 @@ int main(int argc, char const *argv[]) {
     strcpy(saida, argv[2]);
 
     FILE *input = fopen(path, "r");
+    if (!input) { printf("Error while trying to open input file!\nAborting..."); exit(EXIT_FAILURE); }
 
     char sourceName[20];   int sourceIdx = 0, numNodes = 0;
     readSourceName(input, sourceName, &sourceIdx);
