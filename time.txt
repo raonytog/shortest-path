@@ -1,19 +1,18 @@
 Comparação de desempenho dos dois tipos de dados utilizados para implementar o algoritmo de 
 djikstra para encontrar o caminho mínimo para todos os nós de um grafo.
 
-OBS:.
-    time in seconds
-    memory in bytes
+OBS.: tempo em segundos, uso de memória em bytes
 
-file name                   heap_time   heap_memory  |  list_time   list_memory
-caso_teste_muito_pequeno_1  0.0001      10,638       |  0.0001      10,759
-caso_teste_muito_pequeno_2  0.0002      11,147       |  0.0002      11,379
-caso_teste_pequeno_1        0.0029      57,374       |  0.0030      64,542
-caso_teste_pequeno_2        0.0029      57,374       |  0.0030      64,606
-caso_teste_pequeno_3        0.2314      4,091,074    |  0.2734      4,200,802
-caso_teste_pequeno_4        0.2330      4,091,074    |  0.2719      4,199,938
-caso_teste_medio_1          5.6279      100,419,074  |  8.1174      101,075,938
-caso_teste_medio_2          5.7870      100,419,074  |  7.9205      101,074,802
-caso_teste_medio_3          5.8657      100,419,074  |  7.8233      101,067,842
-caso_teste_medio_4          8.7239      144,501,074  |  12.7181     145,299,906
+file name                   |  heap_time   heap_memory  |  list_time   list_memory
+----------------------------|---------------------------|-------------------------
+caso_teste_muito_pequeno_1  |  0.0001      10,638       |  0.0001      10,759
+caso_teste_muito_pequeno_2  |  0.0002      11,147       |  0.0002      11,379
+caso_teste_pequeno_1        |  0.0029      57,374       |  0.0030      64,542
+caso_teste_pequeno_2        |  0.0029      57,374       |  0.0030      64,606
+caso_teste_pequeno_3        |  0.2314      4,091,074    |  0.2734      4,200,802
+caso_teste_pequeno_4        |  0.2330      4,091,074    |  0.2719      4,199,938
+caso_teste_medio_1          |  5.6279      100,419,074  |  8.1174      101,075,938
+caso_teste_medio_2          |  5.7870      100,419,074  |  7.9205      101,074,802
+caso_teste_medio_3          |  5.8657      100,419,074  |  7.8233      101,067,842
+caso_teste_medio_4          |  8.7239      144,501,074  |  12.7181     145,299,906
 
